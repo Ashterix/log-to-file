@@ -53,7 +53,7 @@ class Logger {
      */
     public function write($msg = '', $headline = '')
     {
-        $buildMsg = new Builder($msg, $headline);
+        $buildMsg = new BuildWrapper($msg, $headline);
         $fMsg = $buildMsg->addSeparator()->addDate()->addHeadline(true)->addMsg()->getBuildMsg();
 
         $this->logFile->setNewContent($fMsg)->save();
