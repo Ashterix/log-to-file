@@ -56,7 +56,7 @@ class Logger {
         $buildMsg = new BuildWrapper($msg, $headline);
         $fMsg = $buildMsg->addSeparator()->addDate()->addHeadline(true)->addMsg()->getBuildMsg();
 
-        $this->logFile->setNewContent($fMsg)->save();
+        $this->logFile->setContent($fMsg)->save();
     }
 
 
