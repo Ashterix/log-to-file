@@ -1,7 +1,7 @@
 {
-    "name": "ashterix/country-iso",
+    "name": "ashterix/log-to-file",
     "type": "library",
-    "description": "Get localized country names from ISO 3166-1 codes",
+    "description": "Easy logging to file",
     "license": "MIT",
     "authors": [
         {

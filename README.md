@@ -1,2 +1,2 @@
 # log-to-file
-Easy loging to file
+Easy logging to file
