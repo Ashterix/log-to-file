@@ -5,14 +5,14 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Alex Maistrenko",
+            "name": "Alex Maystrenko",
             "email": "ashterix69@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.4",
-        "ufo-cms/file-system": "dev-master"
+        "ufo-cms/file-system": "1.*"
     },
     "autoload": {
         "psr-0": {
