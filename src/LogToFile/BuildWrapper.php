@@ -22,29 +22,14 @@ class BuildWrapper {
     const DATE_FORMAT = "Y-m-d H:s:i";
 
     /**
-     * @var string Message for wrapping
-     */
-    private $msg = '';
-
-    /**
      * @var string Message after wrapping
      */
     private $wrappedMsg = '';
 
     /**
-     * @var string Title for message
+     * @var string Separator for logic blocks
      */
-    private $headline = '';
-
-    /**
-     * @param string $msg
-     * @param string $headline
-     */
-    public function __construct($msg, $headline = '')
-    {
-        $this->msg = $msg;
-        $this->headline = $headline;
-    }
+    private $separator = '';
 
     /**
      * @description add newline or indentation
@@ -54,6 +39,7 @@ class BuildWrapper {
     private function tabulator($nl = false)
     {
         $this->wrappedMsg .= ($nl) ? PHP_EOL : str_repeat(" ", 8);
+        $this->wrappedMsg .= $this->separator;
     }
 
     /**
@@ -65,7 +51,7 @@ class BuildWrapper {
      */
     public function addSeparator($item = '*')
     {
-        $this->wrappedMsg .= str_repeat($item, 100) . PHP_EOL;
+        $this->wrappedMsg .= str_repeat($item, 50) . PHP_EOL;
         return $this;
     }
 
@@ -84,28 +70,28 @@ class BuildWrapper {
     }
 
     /**
-     * @description Add headline to wrapper
+     * @description Add message to wrapper
      *
+     * @param $msg
      * @param bool $nl
      *
      * @return $this
      */
-    public function addHeadline($nl = false)
+    public function addMsg($msg, $nl = false)
     {
-        $this->wrappedMsg .= $this->headline;
+        $this->wrappedMsg .= $msg;
         $this->tabulator($nl);
         return $this;
     }
 
     /**
-     * @description Add message to wrapper
+     * @description Set separator for logic blocks
      *
-     * @return $this
+     * @param string $separator
      */
-    public function addMsg()
+    public function setSeparator($separator)
     {
-        $this->wrappedMsg .= $this->msg;
-        return $this;
+        $this->separator = $separator;
     }
 
     /**
@@ -117,5 +103,7 @@ class BuildWrapper {
     {
         return $this->wrappedMsg;
     }
+
+
 
 }

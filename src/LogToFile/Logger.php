@@ -24,25 +24,27 @@ class Logger {
     const DEFAULT_LOG_EXT = '.log';
 
     /**
-     * @var null|string filename for logfile
-     */
-    protected $fileName = null;
-
-    /**
      * @var \UFOFilesystem\File
      */
     protected $logFile;
 
     /**
-     * @param string $fileName
+     * @var BuildWrapper
      */
-    public function __construct($fileName = '')
+    protected $wrapperBuilder;
+
+    /**
+     * @param string $fileName
+     * @param string $separator Separator for logic blocks
+     */
+    public function __construct($fileName = '', $separator = '')
     {
         if (empty($fileName)) {
             $fileName = date("Y-m-d") . self::DEFAULT_LOG_EXT;
         }
-        $this->fileName = $fileName;
-        $this->logFile = new File($this->fileName);
+        $this->logFile = new File($this->$fileName);
+        $this->wrapperBuilder = new BuildWrapper();
+        $this->wrapperBuilder->setSeparator($separator);
     }
 
     /**
@@ -53,8 +55,12 @@ class Logger {
      */
     public function write($msg = '', $headline = '')
     {
-        $buildMsg = new BuildWrapper($msg, $headline);
-        $fMsg = $buildMsg->addSeparator()->addDate()->addHeadline(true)->addMsg()->getBuildMsg();
+        $fMsg = $this->wrapperBuilder
+            ->addSeparator()
+            ->addDate()
+            ->addMsg($headline, true)
+            ->addMsg($msg)
+            ->getBuildMsg();
 
         $this->logFile->setContent($fMsg)->save();
     }
