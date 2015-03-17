@@ -1,9 +1,9 @@
 <?
 use LogToFile\Logger;
 
-require_once '../vendor/autoload.php';
+require_once('/vendor/autoload.php');
 
-$log = new Logger('MyLog.log');
+$log = new Logger('MyLog.log', " | ");
 
 $log->write("First message", "Start programme");
 
