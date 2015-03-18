@@ -1,12 +1,12 @@
 <?php
 /**
- * log-to-file 
+ * log-to-file
  *
  * @file: Logger.php
  * @author Ashterix <ashterix69@gmail.com>
- *  
+ *
  * Class - Logger
- * @description 
+ * @description
  *
  * Created by JetBrains PhpStorm.
  * Date: 15.03.2015
@@ -51,7 +51,9 @@ class Logger {
      */
     public function write($msg = '')
     {
-        $this->logFile->setContent($msg)->save();
+        $this->logFile
+            ->setContent($msg)
+            ->save();
     }
 
     /**

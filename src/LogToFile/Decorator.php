@@ -37,6 +37,7 @@ class Decorator {
     public function addSeparator($separator = '*', $countRepetitions = 1)
     {
         $this->wrappedMsg .= str_repeat($separator, $countRepetitions);
+
         return $this;
     }
 
@@ -48,6 +49,7 @@ class Decorator {
     public function addNewline()
     {
         $this->wrappedMsg .= PHP_EOL;
+
         return $this;
     }
 
@@ -59,6 +61,7 @@ class Decorator {
     public function addDate()
     {
         $this->wrappedMsg .= date(self::FORMAT_DATE);
+
         return $this;
     }
 
@@ -70,6 +73,7 @@ class Decorator {
     public function addTime()
     {
         $this->wrappedMsg .= date(self::FORMAT_TIME);
+
         return $this;
     }
 
@@ -83,6 +87,7 @@ class Decorator {
     public function addMsg($msg)
     {
         $this->wrappedMsg .= $msg;
+
         return $this;
     }
 
@@ -95,6 +100,7 @@ class Decorator {
     {
         $return = $this->wrappedMsg;
         $this->wrappedMsg = '';
+
         return $return;
     }
 

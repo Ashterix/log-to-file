@@ -5,14 +5,20 @@ require_once('/vendor/autoload.php');
 
 $log = new Logger('MyLog.log');
 
-function myFormat($log, $msg = "", $headline = "") {
+function myFormat($log, $msg = "", $headline = "")
+{
     /**
      * @var $log Logger;
      */
-    return $log->decorate()
+    return $log
+        ->decorate()
         ->addNewline()
-        ->addDate()->addSeparator(" ")->addTime()->addSeparator(" ", 4)
-        ->addMsg($headline)->addSeparator(" ")
+        ->addDate()
+        ->addSeparator(" ")
+        ->addTime()
+        ->addSeparator(" ", 4)
+        ->addMsg($headline)
+        ->addSeparator(" ")
         ->addMsg($msg)
         ->getBuildMsg();
 }
