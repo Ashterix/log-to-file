@@ -26,21 +26,6 @@ class BuildWrapper {
      */
     private $wrappedMsg = '';
 
-    /**
-     * @var string Separator for logic blocks
-     */
-    private $separator = '';
-
-    /**
-     * @description add newline or indentation
-     *
-     * @param bool $nl
-     */
-    private function tabulator($nl = false)
-    {
-        $this->wrappedMsg .= ($nl) ? PHP_EOL : str_repeat(" ", 8);
-        $this->wrappedMsg .= $this->separator;
-    }
 
     /**
      * @description Add separator to wrapper
@@ -51,21 +36,21 @@ class BuildWrapper {
      */
     public function addSeparator($item = '*')
     {
-        $this->wrappedMsg .= str_repeat($item, 50) . PHP_EOL;
+        $this->wrappedMsg .= str_repeat($item, 100) . PHP_EOL;
         return $this;
     }
 
     /**
      * @description Add date to wrapper
      *
-     * @param bool $nl
+     * @param mixed $separator
      *
      * @return $this
      */
-    public function addDate($nl = false)
+    public function addDate($separator)
     {
         $this->wrappedMsg .= date(self::DATE_FORMAT);
-        $this->tabulator($nl);
+        $this->wrappedMsg .= $separator;
         return $this;
     }
 
@@ -73,25 +58,15 @@ class BuildWrapper {
      * @description Add message to wrapper
      *
      * @param $msg
-     * @param bool $nl
+     * @param mixed $separator
      *
      * @return $this
      */
-    public function addMsg($msg, $nl = false)
+    public function addMsg($msg, $separator = PHP_EOL)
     {
         $this->wrappedMsg .= $msg;
-        $this->tabulator($nl);
+        $this->wrappedMsg .= $separator;
         return $this;
-    }
-
-    /**
-     * @description Set separator for logic blocks
-     *
-     * @param string $separator
-     */
-    public function setSeparator($separator)
-    {
-        $this->separator = $separator;
     }
 
     /**
@@ -101,7 +76,9 @@ class BuildWrapper {
      */
     public function getBuildMsg()
     {
-        return $this->wrappedMsg;
+        $return = $this->wrappedMsg;
+        $this->wrappedMsg = '';
+        return $return;
     }
 
 

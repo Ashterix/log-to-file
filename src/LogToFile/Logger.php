@@ -34,17 +34,22 @@ class Logger {
     protected $wrapperBuilder;
 
     /**
+     * @var string
+     */
+    protected $separator;
+
+    /**
      * @param string $fileName
      * @param string $separator Separator for logic blocks
      */
     public function __construct($fileName = '', $separator = ' ')
     {
+        $this->separator = $separator;
         if (empty($fileName)) {
             $fileName = date("Y-m-d") . self::DEFAULT_LOG_EXT;
         }
-        $this->logFile = new File($this->$fileName);
+        $this->logFile = new File($fileName);
         $this->wrapperBuilder = new BuildWrapper();
-        $this->wrapperBuilder->setSeparator($separator);
     }
 
     /**
@@ -57,9 +62,9 @@ class Logger {
     {
         $fMsg = $this->wrapperBuilder
             ->addSeparator()
-            ->addDate()
-            ->addMsg($headline, true)
-            ->addMsg($msg)
+            ->addDate($this->separator)
+            ->addMsg($headline, $this->separator)
+            ->addMsg($msg, $this->separator)
             ->getBuildMsg();
 
         $this->logFile->setContent($fMsg)->save();
