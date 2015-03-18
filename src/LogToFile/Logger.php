@@ -37,7 +37,7 @@ class Logger {
      * @param string $fileName
      * @param string $separator Separator for logic blocks
      */
-    public function __construct($fileName = '', $separator = '')
+    public function __construct($fileName = '', $separator = ' ')
     {
         if (empty($fileName)) {
             $fileName = date("Y-m-d") . self::DEFAULT_LOG_EXT;
