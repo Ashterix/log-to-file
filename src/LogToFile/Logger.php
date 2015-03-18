@@ -1,7 +1,6 @@
 <?php
 /**
  * log-to-file 
- * @version: 1.0.0
  *
  * @file: Logger.php
  * @author Ashterix <ashterix69@gmail.com>
@@ -29,46 +28,61 @@ class Logger {
     protected $logFile;
 
     /**
-     * @var BuildWrapper
+     * @var Decorator
      */
-    protected $wrapperBuilder;
-
-    /**
-     * @var string
-     */
-    protected $separator;
+    protected $decorator;
 
     /**
      * @param string $fileName
-     * @param string $separator Separator for logic blocks
      */
-    public function __construct($fileName = '', $separator = '')
+    public function __construct($fileName = '')
     {
-        $this->separator = $separator;
         if (empty($fileName)) {
             $fileName = date("Y-m-d") . self::DEFAULT_LOG_EXT;
         }
         $this->logFile = new File($fileName);
-        $this->wrapperBuilder = new BuildWrapper();
+        $this->decorator = new Decorator();
     }
 
     /**
      * @description Write to log file
      *
      * @param string $msg
-     * @param string $headline
      */
-    public function write($msg = '', $headline = '')
+    public function write($msg = '')
     {
-        $fMsg = $this->wrapperBuilder
-            ->addSeparator()
-            ->addDate($this->separator)
-            ->addMsg($headline, $this->separator)
-            ->addMsg($msg, $this->separator)
-            ->getBuildMsg();
-
-        $this->logFile->setContent($fMsg)->save();
+        $this->logFile->setContent($msg)->save();
     }
 
+    /**
+     * @description Write to log file with standard formatting
+     *
+     * @param string $msg
+     * @param string $headline
+     */
+    public function writeStandard($msg = '', $headline = '')
+    {
+        $fMsg = $this->decorator
+            ->addSeparator("*", 100)
+            ->addNewline()
+            ->addDate()
+            ->addSeparator(" ")
+            ->addTime()
+            ->addSeparator(" ", 8)
+            ->addMsg($headline)
+            ->addNewline()
+            ->addMsg($msg)
+            ->getBuildMsg();
+
+        $this->write($fMsg);
+    }
+
+    /**
+     * @description Write to log file
+     */
+    public function decorate()
+    {
+        return $this->decorator;
+    }
 
 }

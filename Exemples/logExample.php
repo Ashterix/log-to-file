@@ -16,3 +16,4 @@ $log->write("Second message", "Log point");
 // ...
 
 $log->write("Programme finish");
+
