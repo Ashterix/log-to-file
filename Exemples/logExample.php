@@ -3,7 +3,7 @@ use LogToFile\Logger;
 
 require_once('/vendor/autoload.php');
 
-$log = new Logger('MyLog.log', " | ");
+$log = new Logger('MyLog.log');
 
 $log->write("First message", "Start programme");
 
@@ -16,3 +16,4 @@ $log->write("Second message", "Log point");
 // ...
 
 $log->write("Programme finish");
+
