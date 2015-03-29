@@ -16,7 +16,7 @@
 namespace LogToFile;
 
 
-use UFOFilesystem\File;
+use UFOFileSystem\File;
 
 class Logger {
 
